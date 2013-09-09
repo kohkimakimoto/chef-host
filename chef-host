@@ -15,6 +15,7 @@ repodir=~/.chef-host/repo
 
 if [ -z "$REPOSITORY" ]; then
     echo "[Error] You need to set repository url."
+    exit
 fi
 
 # Initialize chef repository from git
