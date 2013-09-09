@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+LANG=en
+HN=${HOSTNAME}
+REPOSITORY=""
+
+if [ ! -f ~/.chef-host/chef-host.conf ]; then
+    echo "[Error] Not found ~/.chef-host/chef-host.conf"
+    exit
+fi
+
+. ~/.chef-host/chef-host.conf
+
+repodir=~/.chef-host/repo
+
+if [ -z "$REPOSITORY" ]; then
+    echo "[Error] You need to set repository url."
+fi
+
+# Initialize chef repository from git
+if [ ! -e  $repodir/.git ]; then
+    git clone $REPOSITORY $repodir
+fi
+
+# Update chef reopository using git pull.
+cd $repodir
+git pull
+git submodule init
+git submodule update
+
+
+# Run chef solo using hostname.
+nodefile="$repodir/nodes/${HN}.json"
+echo "sudo chef-solo -c ${repodir}/config/solo.rb -j ${nodefile}"
+sudo chef-solo -c ${repodir}/config/solo.rb -j ${nodefile}
+
+
+
+
+
+
+
