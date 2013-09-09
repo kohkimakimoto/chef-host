@@ -3,7 +3,7 @@
 You can use chef-solo more easily.
 
 **chef-host** downloads chef repository form git repository.
-And runs chef-solo using **nodes/%hostname%.json** 
+And runs chef-solo using **nodes/{hostname}.json** 
 
 # Installation
 
