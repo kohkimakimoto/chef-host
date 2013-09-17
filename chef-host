@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 LANG=en
-HN=${HOSTNAME}
+NODE=${HOSTNAME}
 REPOSITORY=""
 
 if [ ! -f ~/.chef-host/chef-host.conf ]; then
@@ -31,7 +31,7 @@ git submodule update
 
 
 # Run chef solo using hostname.
-nodefile="$repodir/nodes/${HN}.json"
+nodefile="$repodir/nodes/${NODE}.json"
 echo "sudo chef-solo -c ${repodir}/config/solo.rb -j ${nodefile}"
 sudo chef-solo -c ${repodir}/config/solo.rb -j ${nodefile}
 
