@@ -27,7 +27,6 @@ fi
 cd $repodir
 git pull
 
-sudo /opt/chef/embedded/bin/bundle install
 sudo /opt/chef/embedded/bin/berks --path cookbooks
 
 # Run chef solo using hostname.
