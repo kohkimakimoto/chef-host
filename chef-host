@@ -29,6 +29,8 @@ git pull
 git submodule init
 git submodule update
 
+sudo /opt/chef/embedded/bin/bundle install
+sudo /opt/chef/embedded/bin/bundle exec berks --path cookbooks
 
 # Run chef solo using hostname.
 nodefile="$repodir/nodes/${NODE}.json"
