@@ -5,8 +5,11 @@ CONF="$DIR/chef-host.conf"
 REPODIR="$DIR/repo"
 
 REPOURL=""
-if [ $# -eq 1  ]; then
+if [ $# -ge 1  ]; then
     REPOURL=$1
+    if [ $# -eq 2 ]; then
+        NODE=$2
+    fi
 else 
     echo "[Error] You must specify repository url"
     exit
@@ -17,6 +20,9 @@ touch $CONF
 
 echo "# chef host configuration." > $CONF
 echo "REPOSITORY=\"$REPOURL\"" >> $CONF
+if [ $# -eq 2 ]; then
+    echo "NODE=\"$NODE\"" >> $CONF
+fi
 
 mkdir -p $REPODIR
 
