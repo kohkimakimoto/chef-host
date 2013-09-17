@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+EXE_USER=root
+
+user=`whoami`
+if [ $user != $EXE_USER ]; then
+    echo "[Error] You need to run it on the '${EXE_USER}' user."
+    exit
+fi
+
 LANG=en
 NODE=${HOSTNAME}
 REPOSITORY=""
@@ -29,7 +37,6 @@ git pull
 
 sudo /opt/chef/embedded/bin/berks --path cookbooks
 
-# Run chef solo using hostname.
 nodefile="$repodir/nodes/${NODE}.json"
 echo "sudo chef-solo -c ${repodir}/config/solo.rb -j ${nodefile}"
 sudo chef-solo -c ${repodir}/config/solo.rb -j ${nodefile}
