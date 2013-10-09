@@ -12,7 +12,7 @@ NODE=${HOSTNAME}
 REPOSITORY=""
 
 if [ ! -f /var/chef/chef-host.conf ]; then
-    echo "[Error] Not found /var/chef//chef-host.conf"
+    echo "[Error] Not found /var/chef/chef-host.conf"
     exit
 fi
 

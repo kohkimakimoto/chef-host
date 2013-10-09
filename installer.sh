@@ -29,6 +29,7 @@ mkdir -p $REPODIR
 curl https://raw.github.com/kohkimakimoto/chef-host/master/chef-host > /usr/local/bin/chef-host
 chmod 755 /usr/local/bin/chef-host
 
+echo "Completed Installing. You can run chef-host instead of chef-solo."
 
 
 
