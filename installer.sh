@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DIR=~/.chef-host
+DIR=/var/chef
 CONF="$DIR/chef-host.conf"
 REPODIR="$DIR/repo"
 

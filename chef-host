@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-EXE_USER=root
-
+exeuser=root
 user=`whoami`
-if [ $user != $EXE_USER ]; then
-    echo "[Error] You need to run it on the '${EXE_USER}' user."
+if [ $user != $exeuser ]; then
+    echo "[Error] You need to run it on the '${exeuser}' user."
     exit
 fi
 
@@ -12,14 +11,14 @@ LANG=en
 NODE=${HOSTNAME}
 REPOSITORY=""
 
-if [ ! -f ~/.chef-host/chef-host.conf ]; then
-    echo "[Error] Not found ~/.chef-host/chef-host.conf"
+if [ ! -f /var/chef/chef-host.conf ]; then
+    echo "[Error] Not found /var/chef//chef-host.conf"
     exit
 fi
 
-. ~/.chef-host/chef-host.conf
+. /var/chef/chef-host.conf
 
-repodir=~/.chef-host/repo
+repodir=/var/chef/repo
 
 if [ -z "$REPOSITORY" ]; then
     echo "[Error] You need to set repository url."
