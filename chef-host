@@ -8,26 +8,14 @@ if [ $user != $exeuser ]; then
 fi
 
 LANG=en
-NODE=${HOSTNAME}
-REPOSITORY=""
 
-if [ ! -f /var/chef/chef-host.conf ]; then
-    echo "[Error] Not found /var/chef/chef-host.conf"
-    exit
-fi
-
-. /var/chef/chef-host.conf
-
-repodir=/var/chef/repo
-
-if [ -z "$REPOSITORY" ]; then
-    echo "[Error] You need to set repository url."
-    exit
-fi
+node=${HOSTNAME}
+repodir=/var/chef
 
 # Initialize chef repository from git
 if [ ! -e  $repodir/.git ]; then
-    git clone $REPOSITORY $repodir
+    echo "[Error] You need to clone repository to ${repodir}"
+    exit
 fi
 
 # Update chef reopository using git pull.
@@ -36,7 +24,7 @@ git pull
 
 sudo /opt/chef/embedded/bin/berks --path cookbooks
 
-nodefile="$repodir/nodes/${NODE}.json"
+nodefile="$repodir/nodes/${node}.json"
 echo "sudo chef-solo -c ${repodir}/config/solo.rb -j ${nodefile}"
 sudo chef-solo -c ${repodir}/config/solo.rb -j ${nodefile}
 
