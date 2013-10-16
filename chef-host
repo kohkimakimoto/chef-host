@@ -3,7 +3,7 @@
 exeuser=root
 user=`whoami`
 if [ $user != $exeuser ]; then
-    echo "[Error] You need to run it on the '${exeuser}' user."
+    echo "[Error] You need to run by the '${exeuser}' user."
     exit
 fi
 
@@ -22,11 +22,13 @@ fi
 cd $repodir
 git pull
 
-sudo /opt/chef/embedded/bin/berks --path cookbooks
+# Prevent to load system wide ruby and gems.
+unset GEM_HOME
+unset GEM_PATH;
 
-nodefile="$repodir/nodes/${node}.json"
-echo "sudo chef-solo -c ${repodir}/config/solo.rb -j ${nodefile}"
-sudo chef-solo -c ${repodir}/config/solo.rb -j ${nodefile}
+# Runs berks and chef-solo
+/opt/chef/embedded/bin/berks --path cookbooks
+chef-solo -c ${repodir}/config/solo.rb -j ${repodir}/nodes/${node}.json
 
 
 
