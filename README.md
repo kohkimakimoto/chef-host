@@ -2,7 +2,7 @@
 
 You can use chef-solo more easily.
 
-**chef-host** downloads chef repository form git repository.
+**chef-host** downloads chef repository from git repository.
 And runs chef-solo using **nodes/{hostname}.json** 
 
 ## Installation
